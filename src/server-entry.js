@@ -1,9 +1,7 @@
-import createRouter from './router';
-import App from './App.vue';
+import createApp from './app';
 
 export default function () {
-  const app = App;
-  const router = createRouter();
+  const { app, store } = createApp();
 
-  return { app, router };
+  return { app, store };
 }

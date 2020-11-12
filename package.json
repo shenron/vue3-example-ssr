@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "vue-cli-service build",
-    "build:ssr": "SSR=1 vue-cli-service build",
+    "build:server": "vue-cli-service build --dest dist/client",
+    "build:client": "SSR=1 vue-cli-service build --dest dist/server",
+    "build": "rm -rf ./dist && npm run build:client && npm run build:server",
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve",
-    "pressr": "cross-env SSR=true vue-cli-service build",
-    "ssr": "node src/server.js"
+    "pressr": "npm run build",
+    "ssr": "node server.js",
+    "ssr:dev": "node server.js"
   },
   "browserslist": [
     "> 1%",
@@ -35,8 +37,10 @@
     "axios": "^0.21.0",
     "core-js": "^3.7.0",
     "express": "^4.17.1",
+    "serialize-javascript": "^5.0.1",
     "vue": "^3.0.2",
     "vue-router": "^4.0.0-rc.2",
+    "vuex": "^4.0.0-rc.1",
     "webpack": "^4.44.2"
   },
   "devDependencies": {

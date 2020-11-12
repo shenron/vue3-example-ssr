@@ -1,9 +1,13 @@
-import { createApp } from "vue";
-import App from './App';
-import createRouter from './router';
+import createApp from './app'
 
-const app = createApp(App);
+const { app, router, store } = createApp();
 
-app.use(createRouter());
+(async (r, a) => {
+  await r.isReady();
 
-app.mount("#app");
+  console.log(window.__INITIAL_STATE__);
+  if (window.__INITIAL_STATE__) {
+    store.replaceState(window.__INITIAL_STATE__);
+  }
+  a.mount('#app', true);
+})(router, app);

@@ -1,10 +1,10 @@
 <template>
   <img alt="Vue logo" src="../assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HelloWorld msg="Welcome to Your Vue.js App" />
 
   <ul v-if="users.length > 0">
     <li v-for="u in users" :key="u.id">
-      {{u.email}}
+      {{ u.email }}
     </li>
 
     <button @click="clicked">A button</button>
@@ -13,40 +13,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
 import axios from 'axios';
-import HelloWorld from '../components/HelloWorld.vue'
-import isSSR from '../_base/isSSR';
+import HelloWorld from '../components/HelloWorld.vue';
 
-export default defineComponent({
+export default {
   name: 'Home',
   components: {
-    HelloWorld
+    HelloWorld,
   },
-  setup() {
-    const users = ref([]);
-
-    const fetch = async () => {
+  mounted() {
+    console.log(this.$store.state);
+  },
+  data() {
+    return {
+    };
+  },
+  computed: {
+    users() {
+      return this.$store.state.users;
+    }
+  },
+  methods: {
+    async fetch() {
       console.log('fetching ...');
 
       const { data } = await axios.get('https://reqres.in/api/users?page=2');
 
-      users.value.splice(0, users.value.length, ...data.data);
-    };
-
-    if (!isSSR) {
-      fetch();
-    }
-
-    return {
-      users,
-      fetch,
-    };
+      this.$store.commit('setUsers', data.data);
+    },
+    clicked() {
+      console.log('clicked');
+    },
   },
   async serverPrefetch() {
     await this.fetch();
   },
-});
+};
 </script>
 
 <style>

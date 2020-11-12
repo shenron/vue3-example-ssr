@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <ul>
-      <li>
-        <router-link :to="{ name: 'home' }">Go to home</router-link>
-      </li>
-
-      <li>
-        <router-link :to="{ name: 'page' }">Go to other page</router-link>
-      </li>
-    </ul>
-
-    <router-view></router-view>
+    <Home />
   </div>
 </template>
 
 <script lang="ts">
+import Home from './pages/Home.vue';
+
 export default {
   name: 'App',
+  components: {
+    Home,
+  },
+  methods: {
+    clickMe() {
+      alert('yes');
+    },
+  },
 };
 </script>
 
