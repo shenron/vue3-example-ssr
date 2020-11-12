@@ -1,5 +1,5 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <img alt="Vue logo" src="../assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 
   <ul v-if="users.length > 0">
@@ -13,8 +13,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import axios from 'axios';
-import HelloWorld from './components/HelloWorld.vue'
-import isSSR from './_base/isSSR';
+import HelloWorld from '../components/HelloWorld.vue'
+import isSSR from '../_base/isSSR';
 
 export default defineComponent({
   name: 'Home',

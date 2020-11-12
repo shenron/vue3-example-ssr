@@ -1,24 +1,16 @@
-import {
+const {
   createRouter,
-  createWebHistory,
   createMemoryHistory,
-} from 'vue-router'
-import isSSR from './_base/isSSR';
+  createWebHistory,
+} = require('vue-router');
 
-const history = isSSR ? createMemoryHistory() : createWebHistory()
+const isServer = typeof window === 'undefined';
 
-const router = createRouter({
-  history,
-  routes: [
-    { page: '/', name: 'home', component: () => import('./Home.vue').default },
-    { path: '/page', name: 'page', component: () => import('./Page.vue').default }
-  ],
-});
+let history = isServer ? createMemoryHistory() : createWebHistory();
 
-router.beforeEach((to, from, next) => {
-  console.log('before each');
-  next();
-});
+const routes = [
+];
 
-export default router;
-
+export function _createRouter() {
+  return createRouter({ routes, history });
+}

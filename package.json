@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
+    "build:ssr": "SSR=1 vue-cli-service build",
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve",
-    "pressr": "cross-env SSR=true vue-cli-service build",
     "ssr": "node src/server.js"
   },
   "browserslist": [

@@ -5,13 +5,18 @@ exports.chainWebpack = webpackConfig => {
   if (!process.env.SSR) {
     // This is required for repl.it to play nicely with the Dev Server
     webpackConfig.devServer.disableHostCheck(true);
+
+    webpackConfig
+          .entry("app")
+          .clear()
+          .add("./src/client-entry.js");
     return;
   }
 
   webpackConfig
     .entry("app")
     .clear()
-    .add("./src/main.server.js");
+    .add("./src/server-entry.js");
 
   webpackConfig.target("node");
   webpackConfig.output.libraryTarget("commonjs2");
@@ -30,5 +35,5 @@ exports.chainWebpack = webpackConfig => {
   webpackConfig.plugins.delete("progress");
   webpackConfig.plugins.delete("friendly-errors");
 
-  // console.log(webpackConfig.toConfig())
+  console.log(webpackConfig.toConfig())
 };
