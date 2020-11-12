@@ -3,6 +3,17 @@ const express = require("express");
 const { createSSRApp } = require("vue");
 const { renderToString } = require("@vue/server-renderer");
 const manifest = require("../dist/ssr-manifest.json");
+const r = require('vue-router')
+const {
+  createRouter,
+  createMemoryHistory,
+} = r;
+
+const router = createRouter({
+  createMemoryHistory,
+  routes: [
+    { path: '/', name: 'page', component: { template: '<div>Page</div>'} }],
+});
 
 const server = express();
 
@@ -17,8 +28,12 @@ server.use(
   express.static(path.join(__dirname, "../dist", "favicon.ico"))
 );
 
-server.get("*", async (req, res) => {
+server.get("/", async (req, res) => {
+  console.log(req.url);
   const app = createSSRApp(App);
+
+  app.use(router);
+
   const appContent = await renderToString(app);
 
   const html = `
@@ -37,8 +52,12 @@ server.get("*", async (req, res) => {
   res.end(html);
 });
 
-console.log(`
-  You can navigate to http://localhost:8080
-`);
+// server.get("/page", async (req, res) => {
+//   console.log(req.url);
+//
+//   res.send('???')
+// });
+
+console.log('You can navigate to http://localhost:8080');
 
 server.listen(8080);
