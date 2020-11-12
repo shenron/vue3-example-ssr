@@ -2,5 +2,7 @@
   Im a page
 </template>
 <script>
-  export default {}
+
+export default {
+}
 </script>

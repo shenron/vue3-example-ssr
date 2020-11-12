@@ -7,7 +7,7 @@ const manifest = require("../dist/ssr-manifest.json");
 const server = express();
 
 const appPath = path.join(__dirname, "../dist", manifest["app.js"]);
-const App = require(appPath).default;
+const _createApp = require(appPath).default;
 
 server.use("/img", express.static(path.join(__dirname, "../dist", "img")));
 server.use("/js", express.static(path.join(__dirname, "../dist", "js")));
@@ -17,10 +17,17 @@ server.use(
       express.static(path.join(__dirname, "../dist", "favicon.ico"))
 );
 
-server.get("/", async (req, res) => {
-  const app = createSSRApp(App, { url: req.url });
+server.get("*", async (req, res) => {
+  const { app, router } = await _createApp({ url: req.url })
+  const _app = createSSRApp(app, { url: req.ul });
 
-  const appContent = await renderToString(app);
+  router.push(req.url);
+
+  await router.isReady();
+
+  _app.use(router)
+
+  const appContent = await renderToString(_app);
 
   const html = `
   <html>

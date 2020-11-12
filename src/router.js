@@ -9,8 +9,10 @@ const isServer = typeof window === 'undefined';
 let history = isServer ? createMemoryHistory() : createWebHistory();
 
 const routes = [
+  { path: '/', name: 'home', component: () => import('./pages/Home') },
+  { path: '/page', name: 'page', component: () => import('./pages/Page') },
 ];
 
-export function _createRouter() {
+export default function () {
   return createRouter({ routes, history });
 }

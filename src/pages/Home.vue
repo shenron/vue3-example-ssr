@@ -6,6 +6,8 @@
     <li v-for="u in users" :key="u.id">
       {{u.email}}
     </li>
+
+    <button @click="clicked">A button</button>
   </ul>
   <p v-else>No user</p>
 </template>

@@ -1,12 +1,9 @@
-import { _createApp } from './app';
+import createRouter from './router';
+import App from './App.vue';
 
-export default async (ssrContext) => {
-  const { app, router } = _createApp();
-  const { url } = ssrContext;
+export default function () {
+  const app = App;
+  const router = createRouter();
 
-  router.push(url);
-
-  await router.isReady();
-
-  return app;
+  return { app, router };
 }

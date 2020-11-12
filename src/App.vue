@@ -1,6 +1,15 @@
 <template>
   <div id="app">
-    The App
+    <ul>
+      <li>
+        <router-link :to="{ name: 'home' }">Go to home</router-link>
+      </li>
+
+      <li>
+        <router-link :to="{ name: 'page' }">Go to other page</router-link>
+      </li>
+    </ul>
+
     <router-view></router-view>
   </div>
 </template>
