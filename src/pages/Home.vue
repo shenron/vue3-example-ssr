@@ -15,7 +15,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { defineComponent, computed } from 'vue';
-import { useStore } from '../store';
+import { useStore } from '../store/store';
 import HelloWorld from '../components/HelloWorld.vue';
 
 export default defineComponent({

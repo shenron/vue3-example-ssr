@@ -18,14 +18,12 @@ server.use(
       express.static(path.join(__dirname, "./dist/client", "favicon.ico"))
 );
 
-const renderState = (context) => {
-  const contextKey = 'state';
-  const windowKey = '__INITIAL_STATE__';
-  const state = serialize(context[contextKey]);
+const renderState = (store, windowKey) => {
+  const state = serialize(store);
   const autoRemove =
         ';(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());';
-  var nonceAttr = context.nonce ? ' nonce="' + context.nonce + '"' : '';
-  return context[contextKey]
+  const nonceAttr = store.nonce ? ' nonce="' + store.nonce + '"' : ''
+  return store
         ? '<script' +
         nonceAttr +
         '>window.' +
@@ -38,7 +36,12 @@ const renderState = (context) => {
 };
 
 server.get("*", async (req, res) => {
-  const { app, store, router } = await createApp()
+  const {
+    app,
+    store,
+    nativeStore,
+    router,
+  } = await createApp()
 
   router.push(req.url);
 
@@ -51,7 +54,7 @@ server.get("*", async (req, res) => {
       throw err
     }
 
-    appContent = `<div id="app">${renderState(store)}${appContent}</div>`
+    appContent = `<div id="app">${renderState(store.state, '__INITIAL_STATE__')}${renderState(nativeStore.value, '__INITIAL_NATIVE_STATE__')}${appContent}</div>`
 
     html = html.toString().replace('<div id="app"></div>', `${appContent}`)
     res.setHeader('Content-Type', 'text/html')

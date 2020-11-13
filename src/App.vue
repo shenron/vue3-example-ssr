@@ -6,7 +6,7 @@
       </li>
 
       <li>
-        <router-link :to="{ name: 'page' }">Go to other page</router-link>
+        <router-link :to="{ name: 'page', params: { id: 2} }">Go to other page</router-link>
       </li>
     </ul>
 
