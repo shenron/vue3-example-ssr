@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:server": "vue-cli-service build --dest dist/client",
-    "build:client": "SSR=1 vue-cli-service build --dest dist/server",
+    "build:client": "vue-cli-service build --dest dist/client",
+    "build:server": "SSR=1 vue-cli-service build --dest dist/server",
     "build": "rm -rf ./dist && npm run build:client && npm run build:server",
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve",
