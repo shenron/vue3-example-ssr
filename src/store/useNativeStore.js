@@ -1,26 +1,20 @@
-import { inject, provide, ref } from 'vue';
+import { inject, provide, reactive } from 'vue';
 
-const StoreSymbol = Symbol('store');
+const StoreSymbol = Symbol('store')
 
-const store = ref({
-  cpt: -0,
-});
-
-// static store to be able to use without composition api
-const getStore = () => {
-  return store;
-};
-
-export default function () {
-  return {
-    store: inject(StoreSymbol, store),
-    provide: () => {
-
-      return provide(StoreSymbol, store);
-    },
-  };
+export function _createStore() {
+  return reactive({ cpt: 1 });
 }
 
-export {
-  getStore,
-};
+export function provideStore(store) {
+  provide(StoreSymbol, store)
+}
+
+export default function useStore() {
+  const store = inject(StoreSymbol)
+  if (!store) {
+    throw Error('no store provided')
+  }
+  return store
+}
+

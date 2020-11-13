@@ -54,7 +54,7 @@ server.get("*", async (req, res) => {
       throw err
     }
 
-    appContent = `<div id="app">${renderState(store.state, '__INITIAL_STATE__')}${renderState(nativeStore.value, '__INITIAL_NATIVE_STATE__')}${appContent}</div>`
+    appContent = `<div id="app">${renderState(store.state, '__INITIAL_STATE__')}${renderState(nativeStore, '__INITIAL_NATIVE_STATE__')}${appContent}</div>`
 
     html = html.toString().replace('<div id="app"></div>', `${appContent}`)
     res.setHeader('Content-Type', 'text/html')

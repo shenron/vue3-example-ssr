@@ -1,29 +1,28 @@
-import { createSSRApp, h } from 'vue'
+import { createSSRApp, createApp, h } from 'vue'
 import App from './App.vue'
 import createRouter from './router';
-import store from './store/store';
-import useNativeStore, { getStore } from './store/useNativeStore';
+import { provideStore } from './store/useNativeStore';
+import vuexStore from './store/vuexStore';
 
-export default function () {
+export default function ({ nativeStore }) {
   const rootComponent = {
     render: () => h(App),
     components: { App },
     setup() {
-      useNativeStore().provide();
+      provideStore(nativeStore)
     }
   }
 
-  const app = createSSRApp(rootComponent)
+  const app = (typeof window === 'undefined' ? createSSRApp : createApp)(rootComponent);
 
   const router = createRouter();
 
+  app.use(vuexStore);
   app.use(router);
-  app.use(store);
 
   return {
     app,
+    store: vuexStore,
     router,
-    store,
-    nativeStore: getStore(),
   };
 }

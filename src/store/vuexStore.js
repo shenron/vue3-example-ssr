@@ -16,14 +16,14 @@ const _createStore = () => createStore({
   }
 })
 
-const store = _createStore();
+const vuexStore = _createStore();
 
-export default store;
+export default vuexStore;
 
 const useStore = () => {
   return {
-    store,
-    state: store.state,
+    store: vuexStore,
+    state: vuexStore.state,
   }
 }
 

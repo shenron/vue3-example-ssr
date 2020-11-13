@@ -8,14 +8,12 @@
     </li>
   </ul>
   <p v-else>No user</p>
-
-  <button @click="clicked">A button</button>
 </template>
 
 <script lang="ts">
 import axios from 'axios';
 import { defineComponent, computed } from 'vue';
-import { useStore } from '../store/store';
+import { useStore } from '../store/vuexStore';
 import HelloWorld from '../components/HelloWorld.vue';
 
 export default defineComponent({
@@ -36,15 +34,12 @@ export default defineComponent({
       store.commit('setUsers', res.data);
     };
 
-    const clicked = () => console.log('clicked');
-
     if (typeof window !== 'undefined' && !users.value.length) {
       _fetch();
     }
 
     return {
       users,
-      clicked,
       _fetch,
     };
   },

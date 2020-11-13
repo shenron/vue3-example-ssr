@@ -1,7 +1,11 @@
 <template>
   Im the page: {{ id }}
 
+  <br />
+
   Store: {{ store.cpt }}
+
+  <button @click="clicked">Cpt + 1</button>
 </template>
 
 <script>
@@ -13,10 +17,15 @@ export default defineComponent({
     id: String,
   },
   setup() {
-    const { store } = useNativeStore();
+    const store = useNativeStore();
+
+    const clicked = () => {
+      store.cpt += 1
+    };
 
     return {
       store,
+      clicked,
     };
   },
   async serverPrefetch() {
