@@ -23,7 +23,7 @@ Test in:
 ### Project setup
 
 ```
-npm install
+npm ci
 ```
 
 ### Build server and client parts, start ssr server
