@@ -15,6 +15,7 @@ import axios from 'axios';
 import { defineComponent, computed } from 'vue';
 import useStore from '../store/useVuexStore';
 import HelloWorld from '../components/HelloWorld.vue';
+import isSSR from '../_base/isSSR';
 
 export default defineComponent({
   name: 'Home',
@@ -34,7 +35,7 @@ export default defineComponent({
       store.commit('setUsers', res.data);
     };
 
-    if (typeof window !== 'undefined' && !users.value.length) {
+    if (isSSR && !users.value.length) {
       _fetch();
     }
 
