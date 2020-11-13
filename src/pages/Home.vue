@@ -35,7 +35,7 @@ export default defineComponent({
       store.commit('setUsers', res.data);
     };
 
-    if (isSSR && !users.value.length) {
+    if (!isSSR && !users.value.length) {
       _fetch();
     }
 
