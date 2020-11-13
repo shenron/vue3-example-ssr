@@ -38,7 +38,11 @@ const renderState = (context) => {
 };
 
 server.get("*", async (req, res) => {
-  const { app, store } = await createApp({ url: req.url })
+  const { app, store, router } = await createApp({ url: req.url })
+
+  router.push(req.url);
+
+  await router.isReady();
 
   let appContent = await renderToString(app)
 

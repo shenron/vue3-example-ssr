@@ -1,7 +1,7 @@
 import createApp from './app';
 
 export default function () {
-  const { app, store } = createApp();
+  const { app, store, router } = createApp();
 
-  return { app, store };
+  return { app, store, router };
 }
