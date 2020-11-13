@@ -38,7 +38,7 @@ const renderState = (context) => {
 };
 
 server.get("*", async (req, res) => {
-  const { app, store, router } = await createApp({ url: req.url })
+  const { app, store, router } = await createApp()
 
   router.push(req.url);
 
