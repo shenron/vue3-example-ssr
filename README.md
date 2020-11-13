@@ -10,11 +10,14 @@ Example project that demonstrates the new Vue 3 Server Side Rendering APIs and C
 - vuex@next
 - prefetch data
 
-Please follow the video turorial for more information.
+Please follow the video tutorial for more information.
 
 Follow us on
 
 <a href="https://youtube.com/moduscreate?sub_confirmation=1"><img src="https://img.shields.io/badge/youtube-%23FF0000.svg?&style=for-the-badge&logo=youtube&logoColor=white" /></a>
+
+### For TS
+Checkout [ts branch](https://github.com/shenron/vue3-example-ssr/tree/ts)
 
 ### Server Side Rendering with Vue.js 3
 
