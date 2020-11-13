@@ -23,5 +23,8 @@ const { app, router } = createApp({
   if (window.__INITIAL_STATE__) {
     _vuexStore.replaceState(window.__INITIAL_STATE__);
   }
+
+  delete window.__INITIAL_STATE__
+  delete window.__INITIAL_NATIVE_STATE__
   a.mount('#app', true);
 })(router, app);
