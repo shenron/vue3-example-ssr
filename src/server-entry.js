@@ -1,19 +1,24 @@
 import createApp from './app';
-import { _createStore } from './store/useNativeStore'
+import * as nativeStore from './store/useNativeStore'
+import * as vuexStore from './store/useVuexStore';
 
 export default function () {
-  const nativeStore = _createStore();
+  const _nativeStore = nativeStore._createStore();
+
+  const _vuexStore = vuexStore._createStore();
 
   const {
-    store,
     router,
     app,
-  } = createApp({ nativeStore });
+  } = createApp({
+    nativeStore: _nativeStore,
+    vuexStore: _vuexStore,
+  });
 
   return {
     app,
-    store,
     router,
-    nativeStore,
+    nativeStore: _nativeStore,
+    vuexStore: _vuexStore,
   };
 }

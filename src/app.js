@@ -2,15 +2,16 @@ import { createSSRApp, createApp, h } from 'vue'
 import isSSR from '@/_base/isSSR'
 import App from './App.vue'
 import createRouter from './router';
-import { provideStore } from './store/useNativeStore';
-import vuexStore from './store/vuexStore';
+import * as nativeStore from './store/useNativeStore';
+import * as vuexStore from './store/useVuexStore';
 
-export default function ({ nativeStore }) {
+export default function (args) {
   const rootComponent = {
     render: () => h(App),
     components: { App },
     setup() {
-      provideStore(nativeStore)
+      nativeStore.provideStore(args.nativeStore)
+      vuexStore.provideStore(args.vuexStore)
     }
   }
 
@@ -18,12 +19,11 @@ export default function ({ nativeStore }) {
 
   const router = createRouter();
 
-  app.use(vuexStore);
   app.use(router);
+  app.use(args.vuexStore);
 
   return {
     app,
-    store: vuexStore,
     router,
   };
 }

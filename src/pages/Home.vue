@@ -13,7 +13,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { defineComponent, computed } from 'vue';
-import { useStore } from '../store/vuexStore';
+import useStore from '../store/useVuexStore';
 import HelloWorld from '../components/HelloWorld.vue';
 
 export default defineComponent({
@@ -22,9 +22,9 @@ export default defineComponent({
     HelloWorld,
   },
   setup() {
-    const { store, state } = useStore();
+    const store = useStore();
 
-    const users = computed(() => state.users);
+    const users = computed(() => store.state.users);
 
     const _fetch = async () => {
       console.log('fetching ...');
