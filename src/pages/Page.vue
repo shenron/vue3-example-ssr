@@ -8,7 +8,7 @@
   <button @click="clicked">Cpt + 1</button>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import useNativeStore from '../store/useNativeStore';
 
@@ -20,7 +20,7 @@ export default defineComponent({
     const store = useNativeStore();
 
     const clicked = () => {
-      store.cpt += 1
+      store.cpt += 1;
     };
 
     return {
@@ -31,5 +31,5 @@ export default defineComponent({
   async serverPrefetch() {
     this.store.cpt += 10;
   },
-})
+});
 </script>

@@ -1,5 +1,5 @@
 import createApp from './app';
-import * as nativeStore from './store/useNativeStore'
+import * as nativeStore from './store/useNativeStore';
 import * as vuexStore from './store/useVuexStore';
 
 export default function () {

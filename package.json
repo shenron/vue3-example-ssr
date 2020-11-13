@@ -1,35 +1,18 @@
 {
-  "name": "vue3-ssr",
+  "name": "vue3-tsx",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:server": "vue-cli-service build --dest dist/client",
-    "build:client": "SSR=1 vue-cli-service build --dest dist/server",
+    "test:unit": "vue-cli-service test:unit",
+    "build:client": "vue-cli-service build --dest dist/client",
+    "build:server": "SSR=1 vue-cli-service build --dest dist/server",
     "build": "rm -rf ./dist && npm run build:client && npm run build:server",
-    "lint": "vue-cli-service lint",
+    "check-types": "tsc --noemit",
+    "lint": "vue-cli-service lint && npm run check-types",
     "serve": "vue-cli-service serve",
     "pressr": "npm run build",
-    "ssr": "node server.js",
-    "ssr:dev": "node server.js"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "eslintConfig": {
-    "env": {
-      "node": true
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "root": true
+    "ssr": "ts-node server.ts",
+    "ssr:dev": "ts-node server.ts"
   },
   "dependencies": {
     "@vue/server-renderer": "^3.0.2",
@@ -38,20 +21,41 @@
     "express": "^4.17.1",
     "serialize-javascript": "^5.0.1",
     "vue": "^3.0.2",
-    "vue-router": "^4.0.0-rc.2",
+    "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-rc.1",
     "webpack": "^4.44.2"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.15",
+    "@types/serialize-javascript": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
     "@vue/cli-plugin-babel": "^4.5.8",
     "@vue/cli-plugin-eslint": "^4.5.8",
+    "@vue/cli-plugin-router": "^4.5.8",
+    "@vue/cli-plugin-typescript": "^4.5.8",
+    "@vue/cli-plugin-unit-jest": "^4.5.8",
     "@vue/cli-service": "^4.5.8",
     "@vue/compiler-sfc": "^3.0.2",
-    "babel-eslint": "^10.1.0",
-    "cross-env": "^7.0.2",
+    "@vue/eslint-config-airbnb": "^5.1.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
     "eslint": "^7.13.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-vue": "^7.1.0",
+    "lint-staged": "^10.5.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5",
+    "vue-jest": "^3.0.7",
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-node-externals": "^2.5.2"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }

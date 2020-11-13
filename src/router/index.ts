@@ -1,19 +1,19 @@
-const {
+import {
   createRouter,
   createMemoryHistory,
   createWebHistory,
-} = require('vue-router');
+} from 'vue-router';
 
 const isServer = typeof window === 'undefined';
 
-let history = isServer ? createMemoryHistory() : createWebHistory();
+const history = isServer ? createMemoryHistory() : createWebHistory();
 
 const routes = [
-  { path: '/', name: 'home', component: () => import('../pages/Home') },
+  { path: '/', name: 'home', component: () => import('../pages/Home.vue') },
   {
     path: '/page/:id',
     name: 'page',
-    component: () => import('../pages/Page'),
+    component: () => import('../pages/Page.vue'),
     props: true,
   },
 ];

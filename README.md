@@ -9,8 +9,9 @@ Example project that demonstrates the new Vue 3 Server Side Rendering APIs and C
 - vue-router@next
 - vuex@next
 - prefetch data
+- TypeScript
 
-Please follow the video turorial for more information.
+Please follow the video tutorial for more information.
 
 Follow us on
 
