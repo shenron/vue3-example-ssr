@@ -26,7 +26,7 @@ Test in:
 npm install
 ```
 
-### Create and test a server-side-rendered build
+### Build server and client parts, start ssr server
 
 ```
 npm run ssr
@@ -38,12 +38,6 @@ npm run ssr
 
 ```
 npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
 ```
 
 ### Lints and fixes files
