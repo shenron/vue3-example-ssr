@@ -12,10 +12,9 @@
 
 <script lang="ts">
 import axios from 'axios';
-import { defineComponent, computed } from 'vue';
+import { computed, defineComponent } from 'vue';
 import useStore from '../store/useVuexStore';
 import HelloWorld from '../components/HelloWorld.vue';
-import isSSR from '../_base/isSSR';
 
 export default defineComponent({
   name: 'Home',
@@ -35,7 +34,7 @@ export default defineComponent({
       store.commit('setUsers', res.data);
     };
 
-    if (!isSSR && !users.value.length) {
+    if (!users.value.length) {
       _fetch();
     }
 
