@@ -32,7 +32,6 @@
     "root": true
   },
   "dependencies": {
-    "@vue/composition-api": "^1.0.0-beta.19",
     "@vue/server-renderer": "^3.0.2",
     "axios": "^0.21.0",
     "core-js": "^3.7.0",

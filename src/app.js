@@ -1,7 +1,7 @@
 import { createSSRApp, h } from 'vue'
 import App from './App.vue'
 import createRouter from './router';
-import createStore from './store';
+import store from './store';
 
 export default function () {
   const rootComponent = {
@@ -12,7 +12,6 @@ export default function () {
   const app = createSSRApp(rootComponent)
 
   const router = createRouter();
-  const store = createStore();
 
   app.use(router);
   app.use(store);

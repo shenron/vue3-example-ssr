@@ -6,49 +6,52 @@
     <li v-for="u in users" :key="u.id">
       {{ u.email }}
     </li>
-
-    <button @click="clicked">A button</button>
   </ul>
   <p v-else>No user</p>
+
+  <button @click="clicked">A button</button>
 </template>
 
 <script lang="ts">
 import axios from 'axios';
+import { defineComponent, computed } from 'vue';
+import { useStore } from '../store';
 import HelloWorld from '../components/HelloWorld.vue';
 
-export default {
+export default defineComponent({
   name: 'Home',
   components: {
     HelloWorld,
   },
-  mounted() {
-    console.log(this.$store.state);
-  },
-  data() {
-    return {
-    };
-  },
-  computed: {
-    users() {
-      return this.$store.state.users;
-    }
-  },
-  methods: {
-    async fetch() {
+  setup() {
+    const { store, state } = useStore();
+
+    const users = computed(() => state.users);
+
+    const _fetch = async () => {
       console.log('fetching ...');
 
-      const { data } = await axios.get('https://reqres.in/api/users?page=2');
+      const { data: res } = await axios.get('https://reqres.in/api/users?page=2');
 
-      this.$store.commit('setUsers', data.data);
-    },
-    clicked() {
-      console.log('clicked');
-    },
+      store.commit('setUsers', res.data);
+    };
+
+    const clicked = () => console.log('clicked');
+
+    if (typeof window !== 'undefined' && !users.value.length) {
+      _fetch();
+    }
+
+    return {
+      users,
+      clicked,
+      _fetch,
+    };
   },
   async serverPrefetch() {
-    await this.fetch();
+    await this._fetch();
   },
-};
+});
 </script>
 
 <style>

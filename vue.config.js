@@ -3,9 +3,15 @@ const nodeExternals = require("webpack-node-externals");
 const webpack = require('webpack');
 
 module.exports = {
-  configureWebpack: {
-    resolve: { mainFields: ['main', 'module'] }
+  devServer: {
+    overlay: {
+      warnings: false,
+      errors: false,
+    },
   },
+  // configureWebpack: {
+  //   resolve: { mainFields: ['main', 'module'] }
+  // },
   chainWebpack: webpackConfig => {
     webpackConfig.module.rule('vue').uses.delete('cache-loader');
     webpackConfig.module.rule('js').uses.delete('cache-loader');
