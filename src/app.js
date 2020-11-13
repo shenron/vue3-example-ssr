@@ -1,4 +1,5 @@
 import { createSSRApp, createApp, h } from 'vue'
+import isSSR from '@/_base/isSSR'
 import App from './App.vue'
 import createRouter from './router';
 import { provideStore } from './store/useNativeStore';
@@ -13,7 +14,7 @@ export default function ({ nativeStore }) {
     }
   }
 
-  const app = (typeof window === 'undefined' ? createSSRApp : createApp)(rootComponent);
+  const app = (isSSR ? createSSRApp : createApp)(rootComponent);
 
   const router = createRouter();
 
