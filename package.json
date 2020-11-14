@@ -15,18 +15,27 @@
     "ssr:dev": "ts-node server.ts"
   },
   "dependencies": {
+    "@vue/apollo-composable": "^4.0.0-alpha.12",
     "@vue/server-renderer": "^3.0.2",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
     "axios": "^0.21.0",
     "core-js": "^3.7.0",
     "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "node-fetch": "^2.6.1",
     "serialize-javascript": "^5.0.1",
     "vue": "^3.0.2",
-    "vue-router": "^4.0.0-0",
+    "vue-apollo": "^3.0.5",
+    "vue-router": "^4.0.0-rc.3",
     "vuex": "^4.0.0-rc.1",
     "webpack": "^4.44.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
+    "@types/node-fetch": "^2.5.7",
     "@types/serialize-javascript": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",

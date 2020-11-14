@@ -16,6 +16,7 @@ const routes = [
     component: () => import('../pages/Page.vue'),
     props: true,
   },
+  { path: '/graphql', name: 'graphql', component: () => import('../pages/Graphql.vue') },
 ];
 
 export default function () {

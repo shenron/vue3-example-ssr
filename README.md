@@ -39,7 +39,7 @@ npm ci
 npm run ssr
 ```
 
-\*Note: The `pressr` script will create a SSR build before running `src/server.js`.
+\*Note: The `pressr` script will create a SSR build before running `src/server.txt`.
 
 ### Compiles and hot-reloads for development
 

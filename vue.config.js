@@ -11,6 +11,17 @@ module.exports = {
       warnings: false,
       errors: false,
     },
+    disableHostCheck: true,
+    watchOptions: {
+      ignored: /node_modules/,
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000/graphql',
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' },
+      },
+    },
   },
   // configureWebpack: {
   //   resolve: { mainFields: ['main', 'module'] }
