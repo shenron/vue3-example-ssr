@@ -1,3 +1,4 @@
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import createApp from './app';
 import * as nativeStore from './store/useNativeStore';
 import * as vuexStore from './store/useVuexStore';
@@ -7,18 +8,16 @@ export default function () {
 
   const _vuexStore = vuexStore._createStore();
 
-  const {
-    router,
-    app,
-  } = createApp({
-    nativeStore: _nativeStore,
-    vuexStore: _vuexStore,
-  });
+  const apolloCache = new InMemoryCache();
 
   return {
-    app,
-    router,
+    ...createApp({
+      nativeStore: _nativeStore,
+      vuexStore: _vuexStore,
+      apolloCache,
+    }),
     nativeStore: _nativeStore,
     vuexStore: _vuexStore,
+    apolloCache,
   };
 }

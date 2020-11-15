@@ -5,7 +5,6 @@ import isSSR from '@/_base/isSSR';
 import { DefaultApolloClient } from '@vue/apollo-composable';
 import nodeFetch from 'node-fetch';
 import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import ApolloClient from 'apollo-client';
 import App from './App.vue';
 import createRouter from './router';
@@ -16,7 +15,7 @@ import * as vuexStore from './store/useVuexStore';
 
 const enchancedFetch = (url: any, init: any) => fetch(url, {
   ...init,
-  credentials: 'same-origin',
+  // credentials: 'same-origin',
   headers: {
     ...init.headers,
   },
@@ -25,15 +24,16 @@ const enchancedFetch = (url: any, init: any) => fetch(url, {
 const _fetch: any = isSSR ? nodeFetch : enchancedFetch;
 
 // client apollo client
-const apolloClient = new ApolloClient({
+const apolloClient = (cache: any) => new ApolloClient({
   link: createHttpLink({
-    uri: '/api',
+    uri: 'http://localhost:4000/graphql',
     fetchOptions: {
       mode: 'cors',
     },
     fetch: _fetch,
   }),
-  cache: new InMemoryCache(),
+  cache,
+  ssrMode: isSSR,
 });
 
 export default function (args: any) {
@@ -44,7 +44,7 @@ export default function (args: any) {
       nativeStore.provideStore(args.nativeStore);
       vuexStore.provideStore(args.vuexStore);
 
-      provide(DefaultApolloClient, apolloClient);
+      provide(DefaultApolloClient, apolloClient(args.apolloCache));
     },
   };
 

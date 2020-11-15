@@ -1,37 +1,34 @@
 <template>
   <div>Graph Client Demo</div>
-  <template v-if="loading">
-    ...
-  </template>
-  <template v-else-if="error">
-    {{ err }}
-  </template>
-  <template v-else>
-    {{ result }}
-  </template>
+  {{ result }}
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import gql from 'graphql-tag';
+import { defineComponent, computed, watch } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
+import useNativeStore from '@/store/useNativeStore';
+
+const DEMO_QUERY = gql`query { hello }`;
 
 export default defineComponent({
   name: 'Graphql',
   setup() {
-    const DEMO_QUERY = gql`{ hello }`;
-
-    const { result, loading, error } = useQuery(
-      DEMO_QUERY,
-      {},
-      {},
-    );
+    const { result } = useQuery(DEMO_QUERY, {}, {
+      prefetch: true,
+    });
 
     return {
       result,
-      loading,
-      error,
     };
+  },
+  async serverPrefetch() {
+    return new Promise((resolve) => {
+      watch(
+        () => this.result,
+        () => resolve(),
+      );
+    });
   },
 });
 </script>

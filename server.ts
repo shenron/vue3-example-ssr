@@ -40,6 +40,7 @@ server.get('*', async (req, res) => {
     app,
     vuexStore,
     nativeStore,
+    apolloCache,
     router,
   } = await createApp.default();
 
@@ -54,7 +55,7 @@ server.get('*', async (req, res) => {
       throw err;
     }
 
-    appContent = `<div id="app">${renderState(vuexStore.state, '__INITIAL_STATE__')}${renderState(nativeStore, '__INITIAL_NATIVE_STATE__')}${appContent}</div>`;
+    appContent = `<div id="app">${renderState(vuexStore.state, '__INITIAL_STATE__')}${renderState(nativeStore, '__INITIAL_NATIVE_STATE__')}${renderState(apolloCache.extract(), '__INITIAL_APOLLO_STATE__')}${appContent}</div>`;
 
     const str = html.toString().replace('<div id="app"></div>', `${appContent}`);
     res.setHeader('Content-Type', 'text/html');

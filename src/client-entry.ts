@@ -1,3 +1,4 @@
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import * as nativeStore from './store/useNativeStore';
 import * as vuexStore from './store/useVuexStore';
 import createApp from './app';
@@ -14,9 +15,18 @@ if (initialNativeState) {
   });
 }
 
+// @ts-ignore - store hydration
+const initialApolloState = window.__INITIAL_APOLLO_STATE__;
+const apolloCache = new InMemoryCache();
+
+if (initialApolloState) {
+  apolloCache.restore(initialApolloState);
+}
+
 const { app, router } = createApp({
   nativeStore: _nativeStore,
   vuexStore: _vuexStore,
+  apolloCache,
 });
 
 (async (r, a) => {
@@ -27,6 +37,9 @@ const { app, router } = createApp({
   if (initialVuexStore) {
     _vuexStore.replaceState(initialVuexStore);
   }
+
+  // @ts-ignore delete store from window
+  delete window.__INITIAL_APOLLO_STATE__;
 
   // @ts-ignore delete store from window
   delete window.__INITIAL_STATE__;
