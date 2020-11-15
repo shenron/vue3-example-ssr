@@ -7,26 +7,32 @@
 import { defineComponent, computed, watch } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
-import useNativeStore from '@/store/useNativeStore';
 
 const DEMO_QUERY = gql`query { hello }`;
 
 export default defineComponent({
   name: 'Graphql',
   setup() {
-    const { result } = useQuery(DEMO_QUERY, {}, {
+    const { result, loading, error } = useQuery(DEMO_QUERY, {}, {
       prefetch: true,
     });
 
     return {
       result,
+      loading,
+      error,
     };
   },
   async serverPrefetch() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       watch(
-        () => this.result,
+        () => this.loading,
         () => resolve(),
+      );
+
+      watch(
+        () => this.error,
+        () => reject(),
       );
     });
   },
