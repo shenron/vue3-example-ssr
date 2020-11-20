@@ -1,11 +1,13 @@
 import {
-  createSSRApp, createApp, h, provide,
+  createSSRApp,
+  createApp,
+  h,
+  provide,
 } from 'vue';
 import isSSR from '@/_base/isSSR';
 import { DefaultApolloClient } from '@vue/apollo-composable';
 import nodeFetch from 'node-fetch';
-import { createHttpLink } from 'apollo-link-http';
-import ApolloClient from 'apollo-client';
+import { ApolloClient, createHttpLink } from '@apollo/client/core';
 import App from './App.vue';
 import createRouter from './router';
 import * as nativeStore from './store/useNativeStore';
