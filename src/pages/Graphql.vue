@@ -27,7 +27,7 @@ export default defineComponent({
     return new Promise((resolve, reject) => {
       watch(
         () => this.loading,
-        () => resolve(),
+        () => resolve({}),
       );
 
       watch(
