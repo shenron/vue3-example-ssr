@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nodeExternals = require('webpack-node-externals');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -42,7 +43,7 @@ module.exports = {
 
     webpackConfig
       .plugin('manifest')
-      .use(new ManifestPlugin({ fileName: 'ssr-manifest.json' }));
+      .use(new WebpackManifestPlugin({ fileName: 'ssr-manifest.json' }));
 
     webpackConfig.externals(nodeExternals({ allowlist: /\.(css|vue)$/ }));
 
