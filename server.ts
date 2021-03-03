@@ -56,7 +56,7 @@ server.get('*', async (req, res) => {
 
     appContent = `<div id="app">${renderState(vuexStore.state, '__INITIAL_STATE__')}${renderState(nativeStore, '__INITIAL_NATIVE_STATE__')}${appContent}</div>`;
 
-    const str = html.toString().replace('<div id="app"></div>', `${appContent}`);
+    const str = html.toString().replace(new RegExp('<div id="app".*></div>'), `${appContent}`);
     res.setHeader('Content-Type', 'text/html');
     res.send(str);
   });
