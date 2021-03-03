@@ -6,6 +6,7 @@
 
 Example project that demonstrates the new Vue 3 Server Side Rendering APIs and Capabilities:
 
+- Webpack 5
 - vue-router@next
 - vuex@next
 - prefetch data
