@@ -13,6 +13,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { computed, defineComponent } from 'vue';
+import isSSR from '@/_base/isSSR';
 import useStore from '../store/useVuexStore';
 import HelloWorld from '../components/HelloWorld.vue';
 
@@ -34,7 +35,7 @@ export default defineComponent({
       store.commit('setUsers', res.data);
     };
 
-    if (!users.value.length) {
+    if (!isSSR && !users.value.length) {
       _fetch();
     }
 
